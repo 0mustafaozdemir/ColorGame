@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Firebase.Extensions;
+using Firebase.Firestore;
 
 public class Ball : MonoBehaviour
 {
@@ -34,7 +36,8 @@ public class Ball : MonoBehaviour
     public GameObject checkPosition;
 
     public Button starButton;
-
+    Firebase.Auth.FirebaseAuth auth;
+    FirebaseFirestore db;
 
 
     private void Awake()
@@ -45,7 +48,7 @@ public class Ball : MonoBehaviour
         }
         else
         {
-            if(Instance != this)
+            if (Instance != this)
             {
                 Destroy(gameObject);
             }
@@ -57,6 +60,9 @@ public class Ball : MonoBehaviour
         balls.GetComponent<SpriteRenderer>().color = GameController.Instances.colorList[Random.Range(0, RandomRange.instance.circleList.Count)];
         ball = gameObject.GetComponent<SpriteRenderer>().color;
         HighScoreText.text = PlayerPrefs.GetInt("BestScore").ToString();
+        Debug.Log(PlayerPrefs.GetString("AuthID"));
+        auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
+        db = FirebaseFirestore.DefaultInstance;        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -97,7 +103,7 @@ public class Ball : MonoBehaviour
     }
 
     public void starController()
-    {       
+    {
         for (int j = 0; j < allObject.Count; j++)
         {
             Destroy(allObject[j]);
@@ -105,7 +111,7 @@ public class Ball : MonoBehaviour
         }
         balls.transform.position = checkPosition.transform.position;
         balls.GetComponent<Transform>().localScale = new Vector3(0.35f, 0.35f, 0.35f);
-        GameController.Instances.ballIsLife = true;        
+        GameController.Instances.ballIsLife = true;
         GameController.Instances.wrongPanel.SetActive(false);
         for (int i = 0; i < CircleInstantiateList.Count; i++)
         {
@@ -137,8 +143,8 @@ public class Ball : MonoBehaviour
                 if (GameController.Instances.starCount <= 30 && checkPosition != null)
                 {
                     starButton.interactable = true;
-                }          
-               
+                }
+
 
                 GameController.Instances.ballIsLife = false;
                 balls.GetComponent<Transform>().localScale = Vector3.zero;
@@ -148,7 +154,7 @@ public class Ball : MonoBehaviour
                 wrongParticle.transform.position = gameObject.transform.position;
                 wrongParticle.Play();
                 resultScoreText.text = scoreText.text;
-                balls.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;                
+                balls.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
                 HighScores();
                 GameController.Instances.StarCount();
             }
@@ -170,11 +176,32 @@ public class Ball : MonoBehaviour
 
     public void HighScores()
     {
+        var player = new PlayerValue();        
+        player.AuthID = PlayerPrefs.GetString("AuthID");
+        player.Mail = PlayerPrefs.GetString("mail");
+
+
         if (score > PlayerPrefs.GetInt("BestScore", 0))
         {
-            PlayerPrefs.SetInt("BestScore", score);
+            player.hıghScore = int.Parse(HighScoreText.text);
+            
             HighScoreText.text = score.ToString();
+            DocumentReference cityRef = db.Collection("Userss").Document(player.AuthID);
+            Dictionary<string, object> updates = new Dictionary<string, object>
+{
+        { "hıghScore", player.hıghScore }
+};
+
+            cityRef.UpdateAsync(updates).ContinueWithOnMainThread(task =>
+            {
+                Debug.Log(
+                        "Updated the Capital field of the new-city-id document in the cities collection.");
+            });
+
         }
 
     }
+
 }
+
+

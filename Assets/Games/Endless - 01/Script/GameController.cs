@@ -147,7 +147,7 @@ public class GameController : MonoBehaviour
 
     IEnumerator PlayWrong()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.9f);
         wrongPanel.SetActive(true);
         ballIsLife = true;
     }

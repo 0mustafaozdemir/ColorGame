@@ -11,21 +11,21 @@ public class IAP : MonoBehaviour
     }
     public void OnPurchaseComplete(Product product)
   {
-      if (product.definition.id=="com.DevCompany.50coin")
+      if (product.definition.id=="com.devcompany.50coin")
       {
         Debug.Log("50 Coin Aldın");
             Shop.Instance.starCount += 50;
             PlayerPrefs.SetInt("StarCount", Shop.Instance.starCount);
             Shop.Instance.starText.text = Shop.Instance.starCount.ToString();
         }
-      if (product.definition.id=="com.DevCompany.150coin")
+      if (product.definition.id=="com.devcompany.150coin")
       {
             Shop.Instance.starCount += 150;
             PlayerPrefs.SetInt("StarCount", Shop.Instance.starCount);
             Shop.Instance.starText.text = Shop.Instance.starCount.ToString();
             Debug.Log("150 Coin Aldın");
       }
-      if (product.definition.id=="com.DevCompany.300coin")
+      if (product.definition.id=="com.devcompany.300coin")
       {
             Shop.Instance.starCount += 300;
             PlayerPrefs.SetInt("StarCount", Shop.Instance.starCount);
