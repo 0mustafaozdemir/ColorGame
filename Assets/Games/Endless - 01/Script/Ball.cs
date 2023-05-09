@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Firebase.Extensions;
 using Firebase.Firestore;
+using System;
 
 public class Ball : MonoBehaviour
 {
@@ -57,12 +58,38 @@ public class Ball : MonoBehaviour
 
     private void Start()
     {
-        balls.GetComponent<SpriteRenderer>().color = GameController.Instances.colorList[Random.Range(0, RandomRange.instance.circleList.Count)];
+        balls.GetComponent<SpriteRenderer>().color = GameController.Instances.colorList[UnityEngine.Random.Range(0, RandomRange.instance.circleList.Count)];
         ball = gameObject.GetComponent<SpriteRenderer>().color;
-        HighScoreText.text = PlayerPrefs.GetInt("BestScore").ToString();
+
         Debug.Log(PlayerPrefs.GetString("AuthID"));
         auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
-        db = FirebaseFirestore.DefaultInstance;        
+        db = FirebaseFirestore.DefaultInstance;
+        HighScoresChange();
+
+
+
+
+    }
+
+    public void HighScoresChange()
+    {
+        DocumentReference docRef = db.Collection("cities").Document(auth.CurrentUser.UserId);
+
+        docRef.GetSnapshotAsync().ContinueWith((task) =>
+ {
+     var snapshot = task.Result;
+     if (snapshot.Exists)
+     {
+         Debug.Log(String.Format("Document data for {0} document:", snapshot.Id));
+         PlayerValue player = snapshot.ConvertTo<PlayerValue>();
+         HighScoreText.text = player.hıghScore.ToString();
+
+     }
+     else
+     {
+         Debug.Log(String.Format("Document {0} does not exist!", snapshot.Id));
+     }
+ });
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -83,7 +110,7 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.tag == "RandomColor")
         {
             Destroy(collision.gameObject);
-            balls.GetComponent<SpriteRenderer>().color = GameController.Instances.colorList[Random.Range(0, 3)];
+            balls.GetComponent<SpriteRenderer>().color = GameController.Instances.colorList[UnityEngine.Random.Range(0, 3)];
             ball = balls.GetComponent<SpriteRenderer>().color;
         }
         if (collision.gameObject.tag == "Star")
@@ -118,7 +145,7 @@ public class Ball : MonoBehaviour
             Destroy(CircleInstantiateList[i]);
         }
         CircleInstantiateList.Clear();
-        var go = Instantiate(circle[Random.Range(0, circle.Count)], new Vector2(0, balls.transform.position.y + 4.5f), Quaternion.identity);
+        var go = Instantiate(circle[UnityEngine.Random.Range(0, circle.Count)], new Vector2(0, balls.transform.position.y + 4.5f), Quaternion.identity);
         CircleInstantiateList.Add(go);
         GameController.Instances.count -= 30;
         PlayerPrefs.SetInt("StarCount", GameController.Instances.count);
@@ -133,7 +160,7 @@ public class Ball : MonoBehaviour
             {
                 Debug.Log("TRUE");
                 mods();
-                var go = Instantiate(circle[Random.Range(0, circle.Count)], new Vector2(0, CircleInstantiateList[CircleInstantiateList.Count - 1].transform.position.y + 4.5f), Quaternion.identity);
+                var go = Instantiate(circle[UnityEngine.Random.Range(0, circle.Count)], new Vector2(0, CircleInstantiateList[CircleInstantiateList.Count - 1].transform.position.y + 4.5f), Quaternion.identity);
                 CircleInstantiateList.Add(go);
                 score += 1;
                 scoreText.text = score.ToString();
@@ -176,15 +203,17 @@ public class Ball : MonoBehaviour
 
     public void HighScores()
     {
-        var player = new PlayerValue();        
+
+        var player = new PlayerValue();
         player.AuthID = PlayerPrefs.GetString("AuthID");
         player.Mail = PlayerPrefs.GetString("mail");
+        player.hıghScore = int.Parse(HighScoreText.text);
 
-
-        if (score > PlayerPrefs.GetInt("BestScore", 0))
+        if (score > player.hıghScore)
         {
-            player.hıghScore = int.Parse(HighScoreText.text);
-            
+
+            player.hıghScore = score;
+
             HighScoreText.text = score.ToString();
             DocumentReference cityRef = db.Collection("Userss").Document(player.AuthID);
             Dictionary<string, object> updates = new Dictionary<string, object>
@@ -203,5 +232,7 @@ public class Ball : MonoBehaviour
     }
 
 }
+
+
 
 

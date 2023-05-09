@@ -20,4 +20,13 @@ public class PlayerValue
     public int hıghScore { get; set; }
      [FirestoreProperty]
     public string ID { get; set; }
+   
+    public static PlayerValue Instance;
+
+    private void Awake() {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
 }

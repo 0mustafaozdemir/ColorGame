@@ -26,6 +26,8 @@ public class LoginAndSign : MonoBehaviour
     public GameObject loadingPanel;
     public string userMail;
     public string playerID;
+    public GameObject false_Pop_Up;
+    
 
     public static LoginAndSign Instance;
 
@@ -40,19 +42,22 @@ public class LoginAndSign : MonoBehaviour
     {
         auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
         db = FirebaseFirestore.DefaultInstance;
-      
-       
+
+
 
     }
     private void Update()
     {
         if (isFauled == true)
         {
-            clear();
+            false_Pop_Up.SetActive(true);
+            clear();            
+            isFauled = false;
         }
         if (testing == true)
         {
             panel.SetActive(false);
+             PlayerPrefs.SetString("mail", userMail);
             testing = false;
         }
     }
@@ -128,10 +133,13 @@ public class LoginAndSign : MonoBehaviour
                 isFauled = true;
                 return;
             }
+            userMail = email;
             testing = true;
-
+             
+            
             Firebase.Auth.FirebaseUser newUser = task.Result;
             playerID = newUser.UserId;
+            
             Debug.LogFormat("User signed in successfully: {0} ({1})",
                 newUser.DisplayName, newUser.UserId);
 
