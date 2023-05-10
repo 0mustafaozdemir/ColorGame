@@ -96,12 +96,14 @@ public class LoginAndSign : MonoBehaviour
             player.Password = passwordInput.text;
             player.AuthID = newUser.UserId;
             player.UserName = userName;
+          
 
 
             await db.Collection("Userss").Document(newUser.UserId).SetAsync(player).ContinueWithOnMainThread(task =>
             {
                 PlayerPrefs.SetString("mail", mail);
                 PlayerPrefs.SetString("AuthID", newUser.UserId);
+                  PlayerPrefs.SetString("UserName", userName);
                 panel.SetActive(false);
                 userMail = player.Mail;
                 Debug.Log("+");

@@ -93,13 +93,14 @@ public class Ball : MonoBehaviour
  });
     }
 
-   
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "border")
         {
-            Destroy(gameObject);
+
+            DeadBall();
         }
         if (collision.gameObject.tag == "Object")
         {
@@ -170,23 +171,8 @@ public class Ball : MonoBehaviour
             }
             else
             {
-                if (GameController.Instances.starCount <= 30 && checkPosition != null)
-                {
-                    starButton.interactable = true;
-                }
 
-
-                GameController.Instances.ballIsLife = false;
-                balls.GetComponent<Transform>().localScale = Vector3.zero;
-                GameController.Instances.playAnim();
-                Debug.Log("FALSE");
-                wrongParticle.GetComponent<ParticleSystem>().startColor = ball;
-                wrongParticle.transform.position = gameObject.transform.position;
-                wrongParticle.Play();
-                resultScoreText.text = scoreText.text;
-                balls.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
-                HighScores();
-                GameController.Instances.StarCount();
+                DeadBall();
             }
         }
     }
@@ -234,7 +220,28 @@ public class Ball : MonoBehaviour
         }
 
     }
-   
+
+    public void DeadBall()
+    {
+        if (GameController.Instances.count <= 30 && checkPosition != null)
+        {
+            starButton.interactable = true;
+        }
+
+
+        GameController.Instances.ballIsLife = false;
+        balls.GetComponent<Transform>().localScale = Vector3.zero;
+        GameController.Instances.playAnim();
+        Debug.Log("FALSE");
+        wrongParticle.GetComponent<ParticleSystem>().startColor = ball;
+        wrongParticle.transform.position = gameObject.transform.position;
+        wrongParticle.Play();
+        resultScoreText.text = scoreText.text;
+        balls.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
+        HighScores();
+        GameController.Instances.StarCount();
+    }
+
 
 }
 
