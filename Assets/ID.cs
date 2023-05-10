@@ -7,6 +7,7 @@ public class ID : MonoBehaviour
 {
    public TextMeshProUGUI texts;
    public TextMeshProUGUI textmesh;
+   public int score;
     void Start()
     {
         

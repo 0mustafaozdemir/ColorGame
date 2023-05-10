@@ -4995,10 +4995,10 @@ RectTransform:
   m_Father: {fileID: 2084772158}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -8.706, y: 78.36209}
-  m_SizeDelta: {x: 883.6074, y: 1911.0201}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 25.50879, y: 60.293316}
+  m_SizeDelta: {x: 635.3982, y: 1753.1431}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &488993286
 MonoBehaviour:
@@ -6455,6 +6455,7 @@ MonoBehaviour:
   playerMails: []
   playerCount: 
   playerCountText: []
+  gameObj: []
 --- !u!1 &628154348
 GameObject:
   m_ObjectHideFlags: 0
@@ -16560,8 +16561,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1204995570}
   m_HandleRect: {fileID: 1204995569}
   m_Direction: 2
-  m_Value: 1.0000002
-  m_Size: 0.7136826
+  m_Value: 1
+  m_Size: 0.71368253
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
