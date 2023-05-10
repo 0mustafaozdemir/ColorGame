@@ -9646,15 +9646,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3733842812411112612, guid: b012e50f5a07d0d45841b596f62e6646, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.3629
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3733842812411112612, guid: b012e50f5a07d0d45841b596f62e6646, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.3629
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3733842812411112612, guid: b012e50f5a07d0d45841b596f62e6646, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.3629
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3733842812411112612, guid: b012e50f5a07d0d45841b596f62e6646, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9729,6 +9729,7 @@ MonoBehaviour:
   finished: 1
   camera: {fileID: 1263035889}
   isColor: 1
+  position: {x: 0, y: 0, z: 0}
 --- !u!58 &1957926368
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9742,9 +9743,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0051158667, y: 0}
   serializedVersion: 2
-  m_Radius: 0.53999996
+  m_Radius: 0.85717136
 --- !u!50 &1957926369
 Rigidbody2D:
   serializedVersion: 4
