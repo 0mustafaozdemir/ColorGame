@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public TextMeshProUGUI playMail;
     public GameObject LogOutPanel;
+    public GameObject playerPanel;
 
     public static PlayerController Instance;
 
@@ -26,5 +27,6 @@ public class PlayerController : MonoBehaviour
       PlayerPrefs.DeleteKey("mail");
       PlayerPrefs.DeleteKey("AuthID");
       LogOutPanel.SetActive(true);      
+      playerPanel.SetActive(false);
     }
 }

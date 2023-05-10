@@ -12,6 +12,8 @@ public class OpenScenes : MonoBehaviour
     RectTransform rectTransformTouchPanel;
     public float fadeTime;
     public List<GameObject> items = new List<GameObject>();
+    public static OpenScenes Instance;
+
 
     public void TouchOpen(GameObject panel)
     {
@@ -51,6 +53,11 @@ public class OpenScenes : MonoBehaviour
             item.transform.DOScale(1f, 1f).SetEase(Ease.OutBounce);
             yield return new WaitForSeconds(0.25f);
         }
+    }
+
+    public void ItemAnimVoid()
+    {
+       StartCoroutine(ItemAnimation());
     }
 
     public void OpenScene(int sceneInt)

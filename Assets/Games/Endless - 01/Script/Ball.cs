@@ -58,14 +58,15 @@ public class Ball : MonoBehaviour
 
     private void Start()
     {
+
         balls.GetComponent<SpriteRenderer>().color = GameController.Instances.colorList[UnityEngine.Random.Range(0, RandomRange.instance.circleList.Count)];
         ball = gameObject.GetComponent<SpriteRenderer>().color;
 
         Debug.Log(PlayerPrefs.GetString("AuthID"));
         auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
         db = FirebaseFirestore.DefaultInstance;
-        HighScoresChange();
 
+        HighScoresChange();
 
 
 
@@ -73,7 +74,7 @@ public class Ball : MonoBehaviour
 
     public void HighScoresChange()
     {
-        DocumentReference docRef = db.Collection("cities").Document(auth.CurrentUser.UserId);
+        DocumentReference docRef = db.Collection("Userss").Document(PlayerPrefs.GetString("AuthID"));
 
         docRef.GetSnapshotAsync().ContinueWith((task) =>
  {
@@ -212,6 +213,7 @@ public class Ball : MonoBehaviour
         if (score > player.hıghScore)
         {
 
+            Debug.Log("+");
             player.hıghScore = score;
 
             HighScoreText.text = score.ToString();

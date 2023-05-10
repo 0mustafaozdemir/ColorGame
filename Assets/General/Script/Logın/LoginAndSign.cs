@@ -42,9 +42,6 @@ public class LoginAndSign : MonoBehaviour
     {
         auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
         db = FirebaseFirestore.DefaultInstance;
-
-
-
     }
     private void Update()
     {
