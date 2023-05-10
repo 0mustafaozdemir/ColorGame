@@ -6208,8 +6208,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointsList: []
   ball: {fileID: 1421561717}
-  FinishPanel: {fileID: 0}
-  wrongPanel: {fileID: 0}
+  FinishPanel: {fileID: 1602017875}
+  wrongPanel: {fileID: 1922794050}
   wrongPartical: {fileID: 48047151}
 --- !u!4 &1388428082
 Transform:
@@ -6505,6 +6505,7 @@ MonoBehaviour:
   finished: 1
   camera: {fileID: 1263035889}
   isColor: 1
+  position: {x: 0, y: 0, z: 0}
 --- !u!58 &1421561719
 CircleCollider2D:
   m_ObjectHideFlags: 0

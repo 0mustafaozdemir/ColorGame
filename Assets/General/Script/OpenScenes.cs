@@ -19,7 +19,7 @@ public class OpenScenes : MonoBehaviour
     {
         touchPanel = panel;
 
-        rectTransformTouchPanel = touchPanel.GetComponent<RectTransform>();
+        rectTransformTouchPanel = panel.GetComponent<RectTransform>();
         rectTransformTouchPanel.transform.localPosition = new Vector3(0, -400f, 0f);
         rectTransformTouchPanel.DOAnchorPos(new Vector2(0f, 0f), fadeTime, false).SetEase(Ease.OutElastic);
 
@@ -32,7 +32,7 @@ public class OpenScenes : MonoBehaviour
     }
     public void ClosePanel(GameObject panel)
     {
-        rectTransformTouchPanel = touchPanel.GetComponent<RectTransform>();
+        rectTransformTouchPanel = panel.GetComponent<RectTransform>();
         rectTransformTouchPanel.transform.localPosition = new Vector3(0, 0f, 0f);
         rectTransformTouchPanel.DOAnchorPos(new Vector2(0f, -4000f), fadeTime, false).SetEase(Ease.InOutQuint);
 

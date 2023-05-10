@@ -20,6 +20,8 @@ public class PlayerValue
     public int hıghScore { get; set; }
      [FirestoreProperty]
     public string ID { get; set; }
+     [FirestoreProperty]
+    public int Coın { get; set; }
    
     public static PlayerValue Instance;
 

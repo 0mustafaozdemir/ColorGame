@@ -93,6 +93,8 @@ public class Ball : MonoBehaviour
  });
     }
 
+   
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "border")
@@ -232,8 +234,11 @@ public class Ball : MonoBehaviour
         }
 
     }
+   
 
 }
+
+
 
 
 

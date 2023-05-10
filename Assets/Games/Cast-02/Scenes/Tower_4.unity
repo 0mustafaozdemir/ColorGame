@@ -1919,6 +1919,7 @@ MonoBehaviour:
   finished: 1
   camera: {fileID: 1263035889}
   isColor: 1
+  position: {x: 0, y: 0, z: 0}
 --- !u!1 &453418687
 GameObject:
   m_ObjectHideFlags: 0
@@ -6850,8 +6851,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointsList: []
   ball: {fileID: 402461327}
-  FinishPanel: {fileID: 0}
-  wrongPanel: {fileID: 0}
+  FinishPanel: {fileID: 919622734}
+  wrongPanel: {fileID: 1580169766}
   wrongPartical: {fileID: 48047151}
 --- !u!4 &1388428082
 Transform:

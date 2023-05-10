@@ -3573,6 +3573,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   touchPanel: {fileID: 0}
   Panel: {fileID: 735821360}
+  canvasGroup: {fileID: 0}
+  fadeTime: 0
+  items: []
 --- !u!114 &1836452526
 MonoBehaviour:
   m_ObjectHideFlags: 0
