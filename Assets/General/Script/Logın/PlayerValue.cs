@@ -22,6 +22,9 @@ public class PlayerValue
     public string ID { get; set; }
      [FirestoreProperty]
     public int Coın { get; set; }
+    [FirestoreProperty]
+    public string UserName { get; set; }
+
    
     public static PlayerValue Instance;
 

@@ -18,6 +18,7 @@ public class LoginAndSign : MonoBehaviour
 
     public TMP_InputField EMailInput;
     public TMP_InputField passwordInput;
+     public TMP_InputField userNameInput;
 
     public TMP_InputField emailInputRegister;
     public TMP_InputField PasswrodInputRegister;
@@ -61,9 +62,11 @@ public class LoginAndSign : MonoBehaviour
 
     public void SignIn()
     {
-        string email, password;
+        string email, password, userName;
         email = EMailInput.text;
         password = passwordInput.text;
+        userName = userNameInput.text;
+
         auth.CreateUserWithEmailAndPasswordAsync(email.ToString(), password.ToString()).ContinueWith(async task =>
         {
 
@@ -92,6 +95,7 @@ public class LoginAndSign : MonoBehaviour
             player.Mail = mail;
             player.Password = passwordInput.text;
             player.AuthID = newUser.UserId;
+            player.UserName = userName;
 
 
             await db.Collection("Userss").Document(newUser.UserId).SetAsync(player).ContinueWithOnMainThread(task =>

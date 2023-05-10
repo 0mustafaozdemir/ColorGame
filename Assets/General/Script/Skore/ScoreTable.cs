@@ -50,7 +50,7 @@ public class ScoreTable : MonoBehaviour
                 }
                 for (int i = 0; i < 1; i++)
                 {
-                    playerMails.Add(city["Mail"].ToString());
+                    playerMails.Add(city["UserName"].ToString());
                     playerCount.Add(int.Parse(city["hıghScore"].ToString()));
 
                 }
