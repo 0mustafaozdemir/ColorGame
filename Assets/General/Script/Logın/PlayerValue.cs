@@ -24,6 +24,8 @@ public class PlayerValue
     public int Coın { get; set; }
     [FirestoreProperty]
     public string UserName { get; set; }
+    [FirestoreProperty]
+    public int CastleLevelCount { get; set; }
 
    
     public static PlayerValue Instance;

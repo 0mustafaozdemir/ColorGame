@@ -17,8 +17,13 @@ public class BallPosCalculator : MonoBehaviour
         Debug.Log(other.gameObject.name);
         if (other.gameObject.tag == "Ball")
         {
+             
+            
+            BallMain.ınstance.isColor = true;
             ball.transform.position = transformBall.position;
-             BallMain.ınstance.camera.transform.DOMove(new Vector3(0,BallMain.ınstance.camera.transform.position.y+1,-10), .50f);
+            BallMain.ınstance.camera.transform.DOMove(new Vector3(0, BallMain.ınstance.camera.transform.position.y + 1, -10), .50f);
         }
     }
+
+  
 }

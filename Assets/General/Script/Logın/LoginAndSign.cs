@@ -96,6 +96,7 @@ public class LoginAndSign : MonoBehaviour
             player.Password = passwordInput.text;
             player.AuthID = newUser.UserId;
             player.UserName = userName;
+            player.CastleLevelCount = 0;
           
 
 

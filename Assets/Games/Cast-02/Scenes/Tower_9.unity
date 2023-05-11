@@ -3123,18 +3123,6 @@ PrefabInstance:
       value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 3733842812411112612, guid: b012e50f5a07d0d45841b596f62e6646, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3733842812411112612, guid: b012e50f5a07d0d45841b596f62e6646, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3733842812411112612, guid: b012e50f5a07d0d45841b596f62e6646, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.3629
-      objectReference: {fileID: 0}
-    - target: {fileID: 3733842812411112612, guid: b012e50f5a07d0d45841b596f62e6646, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.92
       objectReference: {fileID: 0}
@@ -3208,22 +3196,6 @@ MonoBehaviour:
   camera: {fileID: 1263035889}
   isColor: 1
   position: {x: 0, y: 0, z: 0}
---- !u!58 &566510742
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 566510740}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.023020307, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.8443822
 --- !u!50 &566510743
 Rigidbody2D:
   serializedVersion: 4
@@ -6150,6 +6122,7 @@ GameObject:
   - component: {fileID: 1388428081}
   - component: {fileID: 1388428083}
   - component: {fileID: 1388428084}
+  - component: {fileID: 1388428085}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -6223,6 +6196,19 @@ MonoBehaviour:
   canvasGroup: {fileID: 0}
   fadeTime: 0
   items: []
+--- !u!114 &1388428085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388428080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5282c0591e597d408ae2de75bac3a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  count: 0
 --- !u!1 &1433471457
 GameObject:
   m_ObjectHideFlags: 0
@@ -9835,14 +9821,26 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: IDs, Assembly-CSharp
-        m_MethodName: ID
-        m_Mode: 3
+      - m_Target: {fileID: 1388428085}
+        m_TargetAssemblyTypeName: LevelCount, Assembly-CSharp
+        m_MethodName: LevelCountOpen
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1388428085}
+        m_TargetAssemblyTypeName: LevelCount, Assembly-CSharp
+        m_MethodName: LevelCountCheck
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 9
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

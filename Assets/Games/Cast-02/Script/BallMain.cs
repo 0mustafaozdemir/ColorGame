@@ -46,8 +46,21 @@ public class BallMain : MonoBehaviour
         }
         if (other.gameObject.tag == "border" && isColor == true)
         {
-            
-            transform.gameObject.GetComponent<SpriteRenderer>().color = other.gameObject.GetComponent<SpriteRenderer>().color;
+            if (transform.gameObject.GetComponent<SpriteRenderer>().color == other.gameObject.GetComponent<SpriteRenderer>().color)
+            {
+                transform.gameObject.GetComponent<SpriteRenderer>().color = other.gameObject.GetComponent<SpriteRenderer>().color;
+                isColor = false;
+            }
+            else
+            {
+
+                Debug.Log("+");
+            }
+            if (isColor == true)
+            {
+                 transform.gameObject.GetComponent<SpriteRenderer>().color = other.gameObject.GetComponent<SpriteRenderer>().color;
+            }
+
         }
         if (other.gameObject.tag == "Enemies")
         {

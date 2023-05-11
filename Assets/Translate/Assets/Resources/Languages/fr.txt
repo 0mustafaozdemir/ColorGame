@@ -34,3 +34,6 @@ PASSWORD=SIFRE
 EXIT=CIKIS YAP
 WARNING=UYARI
 WARNINTWO=BEKLENMEDIK BİR SORUN MEYDANA GELDI!
+ANNONUNCEMENTTHREE=Haraket ettirdiginiz nesneyi ekrana tiklayarak haraket ettiriniz!
+ANNONUNCEMENTFOUR=Kazandiginiz veya satin aldiginiz altinlar ile top sekli veya canlandırma alabilirsiniz!
+ANNONUNCEMENTFİVE=En yuksek skoru elde ederek skor tablosunda yukari siralara yerles!

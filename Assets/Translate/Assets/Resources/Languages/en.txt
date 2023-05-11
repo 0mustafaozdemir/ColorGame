@@ -34,3 +34,6 @@ PASSWORD=PASSWORD
 EXIT=EXIT
 WARNING=WARNING
 WARNINTWO=AN UNEXPECTED PROBLEM OCCURRED!
+ANNONUNCEMENTTHREE=Make the object you move move by clicking on the screen!
+ANNONUNCEMENTFOUR=You can get ball shape or animation with the gold you have won or bought!
+ANNONUNCEMENTFİVE=Rank higher on the leaderboard by achieving the highest score!

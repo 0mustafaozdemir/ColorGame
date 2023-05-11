@@ -20,6 +20,7 @@ public class ScoreTable : MonoBehaviour
     public List<TextMeshProUGUI> playerCountText = new List<TextMeshProUGUI>();
     public static Player instance;
     public List<ID> gameObj = new List<ID>();
+    public List<GameObject> players = new List<GameObject>();
 
 
 
@@ -80,27 +81,31 @@ public class ScoreTable : MonoBehaviour
         for (int i = 0; i < PlayerCount; i++)
         {
             var player = Instantiate(playerPrefab, playerPrefab.transform.position, Quaternion.identity).GetComponent<ID>();
-            gameObj.Add(player);
+            players.Add(player.gameObject);
 
+            gameObj.Add(player);
             playerText.Add(player.GetComponent<ID>().texts);
             playerText[i].text = playerMails[i].ToString();
             playerCountText.Add(player.GetComponent<ID>().textmesh);
             playerCountText[i].text = playerCount[i].ToString();
             player.GetComponent<ID>().score = int.Parse(player.GetComponent<ID>().textmesh.text);
+
+
         }
-       SortList();
+        SortList();
     }
 
+    
     public void SortList()
     {
-        gameObj.Sort((obj1,obj2) => obj2.score.CompareTo(obj1.score));
+        gameObj.Sort((obj1, obj2) => obj2.score.CompareTo(obj1.score));
         //gameObj.Reverse();
         for (int i = 0; i < gameObj.Count; i++)
         {
-    
-           gameObj[i].transform.parent = parentObject.transform;
+
+            gameObj[i].transform.parent = parentObject.transform;
         }
-        
+
     }
 
 
