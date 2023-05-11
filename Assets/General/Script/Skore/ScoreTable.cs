@@ -78,6 +78,7 @@ public class ScoreTable : MonoBehaviour
     IEnumerator wait()
     {
         yield return new WaitForSecondsRealtime(0.1f);
+    
         for (int i = 0; i < PlayerCount; i++)
         {
             var player = Instantiate(playerPrefab, playerPrefab.transform.position, Quaternion.identity).GetComponent<ID>();
