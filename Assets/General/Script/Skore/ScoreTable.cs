@@ -21,6 +21,9 @@ public class ScoreTable : MonoBehaviour
     public static Player instance;
     public List<ID> gameObj = new List<ID>();
     public List<GameObject> players = new List<GameObject>();
+    public GameObject parentOBJ;
+
+    public TextMeshProUGUI ınfoText;
 
 
 
@@ -67,6 +70,10 @@ public class ScoreTable : MonoBehaviour
             }
             );
         }
+        if (playerCount.Count <= 9)
+        {
+            parentObject.transform.parent = parentOBJ.transform;
+        }
 
     }
 
@@ -78,35 +85,54 @@ public class ScoreTable : MonoBehaviour
     IEnumerator wait()
     {
         yield return new WaitForSecondsRealtime(0.1f);
-    
-        for (int i = 0; i < PlayerCount; i++)
+        if (playerCount.Count <= 50)
         {
-            var player = Instantiate(playerPrefab, playerPrefab.transform.position, Quaternion.identity).GetComponent<ID>();
-            players.Add(player.gameObject);
+            for (int i = 0; i < PlayerCount; i++)
+            {
+                var player = Instantiate(playerPrefab, playerPrefab.transform.position, Quaternion.identity).GetComponent<ID>();
+                players.Add(player.gameObject);
 
-            gameObj.Add(player);
-            playerText.Add(player.GetComponent<ID>().texts);
-            playerText[i].text = playerMails[i].ToString();
-            playerCountText.Add(player.GetComponent<ID>().textmesh);
-            playerCountText[i].text = playerCount[i].ToString();
-            player.GetComponent<ID>().score = int.Parse(player.GetComponent<ID>().textmesh.text);
+                gameObj.Add(player);
+                playerText.Add(player.GetComponent<ID>().texts);
+                playerText[i].text = playerMails[i].ToString();
+                playerCountText.Add(player.GetComponent<ID>().textmesh);
+                playerCountText[i].text = playerCount[i].ToString();
+                player.GetComponent<ID>().score = int.Parse(player.GetComponent<ID>().textmesh.text);
+            }
+            SortList();
+            test();        }
 
 
-        }
-        SortList();
     }
 
-    
+
     public void SortList()
     {
         gameObj.Sort((obj1, obj2) => obj2.score.CompareTo(obj1.score));
         //gameObj.Reverse();
         for (int i = 0; i < gameObj.Count; i++)
         {
-
             gameObj[i].transform.parent = parentObject.transform;
         }
+        for (int i = 0; i < gameObj.Count; i++)
+        {
+            gameObj[i].GetComponent<ID>().scorePosCount = i + 1;
+            gameObj[i].GetComponent<ID>().scorePosText.text = gameObj[i].GetComponent<ID>().scorePosCount.ToString();
+        }
 
+
+    }
+    public void test()
+    {
+        for (int i = 0; i < playerMails.Count; i++)
+        {
+            if (playerMails[i] ==     (PlayerPrefs.GetString("UserName")))
+            {
+                var go = players[i];
+                Debug.Log(go.GetComponent<ID>().scorePosCount);
+                ınfoText.text = go.GetComponent<ID>().scorePosCount.ToString();
+            }
+        }
     }
 
 

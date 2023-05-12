@@ -8,6 +8,8 @@ public class ID : MonoBehaviour
    public TextMeshProUGUI texts;
    public TextMeshProUGUI textmesh;
    public int score;
+   public int scorePosCount;
+   public TextMeshProUGUI scorePosText;
     void Start()
     {
         

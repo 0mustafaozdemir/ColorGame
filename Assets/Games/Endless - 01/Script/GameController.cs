@@ -68,7 +68,7 @@ public class GameController : MonoBehaviour
 
     IEnumerator TouchSecond()
     {
-        yield return new WaitForSecondsRealtime(0.1f);
+        yield return new WaitForSecondsRealtime(0.0f);
         touchBool = true;
     }
 
