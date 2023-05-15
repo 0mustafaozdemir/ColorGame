@@ -33,7 +33,12 @@ SIGNIN=REGISTER
 PASSWORD=PASSWORD
 NAME=NAME
 EXIT=EXIT
+CASTLELEVELS=CASTLE LEVELS
+WATCH=WATCH
+COININFO=Get gold by watching this ad.
 REMEMBER=REMEMBER ME
+ADS=ADS
+GIFT=GİFT
 WARNING=WARNING
 WARNINTWO=AN UNEXPECTED PROBLEM OCCURRED!
 ANNONUNCEMENTTHREE=Make the object you move move by clicking on the screen!
@@ -41,5 +46,6 @@ ANNONUNCEMENTFOUR=You can get ball shape or animation with the gold you have won
 ANNONUNCEMENTFİVE=Rank higher on the leaderboard by achieving the highest score!
 SKOR=SKOR
 SHOP=SHOP
+LEVELS=LEVELS
 
 

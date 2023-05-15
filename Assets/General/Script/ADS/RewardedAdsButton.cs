@@ -58,7 +58,9 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     {
         if (adUnitId.Equals(_adUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
         {
-            Debug.Log("Unity Ads Rewarded Ad Completed");
+           int count = PlayerPrefs.GetInt("StarCount");
+           count += 10;
+           PlayerPrefs.SetInt("StarCount",count);
             // Grant a reward.
         }
     }
