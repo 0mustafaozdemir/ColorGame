@@ -85,7 +85,7 @@ public class LoginAndSign : MonoBehaviour
 
             Debug.Log("Sign up");
 
-            Firebase.Auth.FirebaseUser newUser = task.Result;
+            Firebase.Auth.FirebaseUser newUser = task.Result.User;
             playerID = newUser.UserId;
             Debug.LogFormat("Firebase user created successfully: {0} ({1})",
             newUser.DisplayName, newUser.UserId);
@@ -141,7 +141,7 @@ public class LoginAndSign : MonoBehaviour
             testing = true;
              
             
-            Firebase.Auth.FirebaseUser newUser = task.Result;
+            Firebase.Auth.FirebaseUser newUser = task.Result.User;
             playerID = newUser.UserId;
             
             Debug.LogFormat("User signed in successfully: {0} ({1})",
@@ -161,8 +161,6 @@ public class LoginAndSign : MonoBehaviour
         passwordInput.text = string.Empty;
         //loadingPanel.SetActive(true);
         //StartCoroutine(FauledScene());
-
-
     }
     IEnumerator FauledScene()
     {

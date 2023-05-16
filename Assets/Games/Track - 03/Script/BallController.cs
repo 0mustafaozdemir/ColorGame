@@ -6,29 +6,36 @@ using DG.Tweening;
 public class BallController : MonoBehaviour
 {
     public GameObject m_PlayerObj;
-    public Transform[] positionPoint;
-    [Range(0,1)]
+    public List<Transform> transformObject = new List<Transform>();
+    public bool downBool;
     public float value;
-    // Start is called before the first frame update
-    void Start()
-    {
-        Debug.Log(iTween.PathLength(positionPoint));
-    }
-    float tempTime;
-    // Update is called once per frame
+    float timer = 2;
+
     void Update()
     {
-        
-        if (value < 2)
+        if (Input.GetMouseButtonDown(0))
         {
-            value += Time.deltaTime / 10;
+            value += 1;
+            Vector2 pos = transformObject[(int)value].transform.position;
+            m_PlayerObj.transform.DOMove(pos, .5f).SetEase(Ease.InBack);
+            downBool = false;
         }
-        iTween.PutOnPath(m_PlayerObj, positionPoint, value);
+        else
+        {
+            if (timer < Time.time)
+            {
+
+
+                timer = Time.time + 1;
+            }
+
+        }
+
     }
+
     private void OnDrawGizmos()
     {
-        
-        iTween.DrawPath(positionPoint,Color.green);
+
     }
 }
 

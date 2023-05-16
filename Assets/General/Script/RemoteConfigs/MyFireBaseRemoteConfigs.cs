@@ -7,9 +7,7 @@ using Firebase.Extensions;
 
 public class MyFireBaseRemoteConfigs : MonoBehaviour
 {
-    Firebase.DependencyStatus dependencyStatus = Firebase.DependencyStatus.UnavailableOther;
-    // Use this for initialization
-    void Start()
+   /* void Start()
     {
         Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
         {
@@ -39,7 +37,7 @@ public class MyFireBaseRemoteConfigs : MonoBehaviour
         defaults.Add("config_test_float", 1.0);
         defaults.Add("config_test_bool", false);
 
-        Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance.SetDefaultsAsync(defaults);
+        Firebase.RemoteConfig.FirebaseRemoteConfig.SetDefaults(defaults);
         Debug.Log("Remote config ready!");
     }
     public void FetchFireBase()
@@ -50,11 +48,12 @@ public class MyFireBaseRemoteConfigs : MonoBehaviour
     {
         //   DebugLog("config_test_string: " +
         //        Firebase.RemoteConfig.FirebaseRemoteConfig.GetValue("config_test_string").StringValue);
-
+        Debug.Log("maxCountToShowAdmob: " +
+            Firebase.RemoteConfig.FirebaseRemoteConfig.GetValue("maxCountToShowAdmob").LongValue);
         //   DebugLog("config_test_float: " +
         //            Firebase.RemoteConfig.FirebaseRemoteConfig.GetValue("config_test_float").DoubleValue);
-
-        var go = Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance.GetValue("Tests").BooleanValue;
+        //   DebugLog("config_test_bool: " +
+        //            Firebase.RemoteConfig.FirebaseRemoteConfig.GetValue("config_test_bool").BooleanValue);
     }
 
     // Start a fetch request.
@@ -66,29 +65,48 @@ public class MyFireBaseRemoteConfigs : MonoBehaviour
         // By default the timespan is 12 hours, and for production apps, this is a good
         // number.  For this example though, it's set to a timespan of zero, so that
         // changes in the console will always show up immediately.
-        System.Threading.Tasks.Task fetchTask = Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance.FetchAsync(
+        System.Threading.Tasks.Task fetchTask = Firebase.RemoteConfig.FirebaseRemoteConfig.FetchAsync(
             TimeSpan.Zero);
         return fetchTask.ContinueWith(FetchComplete);
     }
 
     void FetchComplete(Task fetchTask)
     {
-        if (!fetchTask.IsCompleted)
+        if (fetchTask.IsCanceled)
         {
-            Debug.LogError("Retrieval hasn't finished.");
-            return;
+            Debug.Log("Fetch canceled.");
+        }
+        else if (fetchTask.IsFaulted)
+        {
+            Debug.Log("Fetch encountered an error.");
+        }
+        else if (fetchTask.IsCompleted)
+        {
+            Debug.Log("Fetch completed successfully!");
         }
 
-        var remoteConfig = Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance;
-        var info = remoteConfig.Info;
-       
-
-        // Fetch successful. Parameter values must be activated to use.
-        remoteConfig.ActivateAsync()
-          .ContinueWithOnMainThread(
-            task =>
-            {
-                Debug.Log($"Remote data loaded and ready for use. Last fetch time {info.FetchTime}.");
-            });
-    }
+        var info = Firebase.RemoteConfig.FirebaseRemoteConfig.Info;
+        switch (info.LastFetchStatus)
+        {
+            case Firebase.RemoteConfig.LastFetchStatus.Success:
+                Firebase.RemoteConfig.FirebaseRemoteConfig.ActivateFetched();
+                Debug.Log(String.Format("Remote data loaded and ready (last fetch time {0}).",
+                    info.FetchTime));
+                break;
+            case Firebase.RemoteConfig.LastFetchStatus.Failure:
+                switch (info.LastFetchFailureReason)
+                {
+                    case Firebase.RemoteConfig.FetchFailureReason.Error:
+                        Debug.Log("Fetch failed for unknown reason");
+                        break;
+                    case Firebase.RemoteConfig.FetchFailureReason.Throttled:
+                        Debug.Log("Fetch throttled until " + info.ThrottledEndTime);
+                        break;
+                }
+                break;
+            case Firebase.RemoteConfig.LastFetchStatus.Pending:
+                Debug.Log("Latest Fetch call still pending.");
+                break;
+        }
+    }*/
 }
