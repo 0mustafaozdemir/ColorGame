@@ -6,19 +6,24 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
 
+using Firebase.Auth;
 using Firebase.Extensions;
 using Firebase.Firestore;
+
+
 
 public class LoginAndSign : MonoBehaviour
 {
     Firebase.Auth.FirebaseAuth auth;
     FirebaseFirestore db;
     public GameObject panel;
+    public FirebaseUser user;
+
 
 
     public TMP_InputField EMailInput;
     public TMP_InputField passwordInput;
-     public TMP_InputField userNameInput;
+    public TMP_InputField userNameInput;
 
     public TMP_InputField emailInputRegister;
     public TMP_InputField PasswrodInputRegister;
@@ -27,8 +32,8 @@ public class LoginAndSign : MonoBehaviour
     public GameObject loadingPanel;
     public string userMail;
     public string playerID;
-    public GameObject false_Pop_Up;
-    
+    public GameObject false_Pop_Up, emailVerificionPanel;
+    public TextMeshProUGUI emailVerifiticonText;
 
     public static LoginAndSign Instance;
 
@@ -49,13 +54,13 @@ public class LoginAndSign : MonoBehaviour
         if (isFauled == true)
         {
             false_Pop_Up.SetActive(true);
-            clear();            
+            clear();
             isFauled = false;
         }
         if (testing == true)
         {
             panel.SetActive(false);
-             PlayerPrefs.SetString("mail", userMail);
+            PlayerPrefs.SetString("mail", userMail);
             testing = false;
         }
     }
@@ -83,6 +88,8 @@ public class LoginAndSign : MonoBehaviour
                 return;
             }
 
+
+
             Debug.Log("Sign up");
 
             Firebase.Auth.FirebaseUser newUser = task.Result.User;
@@ -97,19 +104,20 @@ public class LoginAndSign : MonoBehaviour
             player.AuthID = newUser.UserId;
             player.UserName = userName;
             player.CastleLevelCount = 0;
-          
+
 
 
             await db.Collection("Userss").Document(newUser.UserId).SetAsync(player).ContinueWithOnMainThread(task =>
             {
                 PlayerPrefs.SetString("mail", mail);
                 PlayerPrefs.SetString("AuthID", newUser.UserId);
-                  PlayerPrefs.SetString("UserName", userName);
+                PlayerPrefs.SetString("UserName", userName);
                 panel.SetActive(false);
                 userMail = player.Mail;
                 Debug.Log("+");
 
                 Debug.Log(player.Mail);
+                
             });
 
             Debug.Log("Kapandı");
@@ -139,11 +147,11 @@ public class LoginAndSign : MonoBehaviour
             }
             userMail = email;
             testing = true;
-             
-            
+
+
             Firebase.Auth.FirebaseUser newUser = task.Result.User;
             playerID = newUser.UserId;
-            
+
             Debug.LogFormat("User signed in successfully: {0} ({1})",
                 newUser.DisplayName, newUser.UserId);
 
@@ -168,6 +176,8 @@ public class LoginAndSign : MonoBehaviour
         loadingPanel.SetActive(false);
     }
 
+   
 
+ 
 
 }

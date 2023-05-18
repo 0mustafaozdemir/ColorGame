@@ -15,16 +15,15 @@ public class LevelManagers : MonoBehaviour
     private void Start()
     {
         db = FirebaseFirestore.DefaultInstance;
-        LevelCountOpen();
     }
 
-    public void LevelCountOpen()
+    public void LevelCountOpen(string name)
     {
-       Query allCitiesQuery = db.Collection("Userss");
+        Query allCitiesQuery = db.Collection("Userss");
         allCitiesQuery.GetSnapshotAsync().ContinueWithOnMainThread(task =>
         {
             QuerySnapshot allCitiesQuerySnapshot = task.Result;
-            
+
 
             foreach (DocumentSnapshot documentSnapshot in allCitiesQuerySnapshot.Documents)
             {
@@ -33,13 +32,19 @@ public class LevelManagers : MonoBehaviour
                 Dictionary<string, object> city = documentSnapshot.ToDictionary();
                 foreach (KeyValuePair<string, object> pair in city)
                 {
-                    // Debug.Log(String.Format("{0}: {1}", , pair.Value));                    
+
                 }
-               
-                    levelCount = int.Parse(city["CastleLevelCount"].ToString());                    
+               if (city["AuthID"].ToString() == PlayerPrefs.GetString("AuthID"))
+               {
+                levelCount = int.Parse(city[name].ToString());
+                Debug.Log(levelCount);
+                LevelInteractableOpen();
+               }
                 
 
+
             }
+
         });
     }
 

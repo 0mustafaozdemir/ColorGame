@@ -26,6 +26,8 @@ public class PlayerValue
     public string UserName { get; set; }
     [FirestoreProperty]
     public int CastleLevelCount { get; set; }
+     [FirestoreProperty]
+    public int TrackLevelCount { get; set; }
 
    
     public static PlayerValue Instance;

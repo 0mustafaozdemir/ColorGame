@@ -7,6 +7,7 @@ public class RandomRange : MonoBehaviour
     public List<GameObject> circleList = new List<GameObject>();
     public static RandomRange instance;
     public bool isCheckCollider = true;
+    
     private void Awake()
     {
         if (instance == null)

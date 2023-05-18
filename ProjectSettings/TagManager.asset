@@ -9,6 +9,7 @@ TagManager:
   - checkpoint
   - Object
   - Star
+  - Enemy
   layers:
   - Default
   - TransparentFX
