@@ -49,22 +49,25 @@ public class GameController_Track : MonoBehaviour
     {
         gameObject.transform.position = new Vector2(gameObject.transform.position.x + 0.02f, gameObject.transform.position.y);
         Camera.transform.DOMove(new Vector3(gameObject.transform.position.x, 0, -10), .50f);
-        Debug.Log("Ben Fixed Update");
+        Debug.Log("Ben Fixed Update"); 
          if (Input.GetMouseButtonDown(0))
         {
-            ballEffectTwo.Play();
+           ballEffectTwo.Play();
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+             ballEffectTwo.Stop();
         }
         if (Input.GetMouseButton(0))
         {
-            touch = true;
-            rb.gravityScale = 0f;
+            
+            
             gameObject.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 0.05f);
         }
         else
-        {
-            touch = false;
-            ballEffectTwo.Stop();
-           rb.gravityScale = 0.5f;
+        {          
+           
+          gameObject.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.03f);
         }
        
 

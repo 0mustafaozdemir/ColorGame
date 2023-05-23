@@ -22,11 +22,19 @@ public class ScoreTable : MonoBehaviour
     public List<ID> gameObj = new List<ID>();
     public List<GameObject> players = new List<GameObject>();
     public GameObject parentOBJ;
+    public List<String> authID = new List<string>();
 
     public TextMeshProUGUI ınfoText;
+    public static ScoreTable Instance;
 
 
-
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
 
     private void Start()
     {
@@ -56,7 +64,7 @@ public class ScoreTable : MonoBehaviour
                 {
                     playerMails.Add(city["UserName"].ToString());
                     playerCount.Add(int.Parse(city["hıghScore"].ToString()));
-
+                    authID.Add(city["AuthID"].ToString());
                 }
 
             }
@@ -100,7 +108,9 @@ public class ScoreTable : MonoBehaviour
                 player.GetComponent<ID>().score = int.Parse(player.GetComponent<ID>().textmesh.text);
             }
             SortList();
-            test();        }
+            test();
+         
+        }
 
 
     }
@@ -126,7 +136,7 @@ public class ScoreTable : MonoBehaviour
     {
         for (int i = 0; i < playerMails.Count; i++)
         {
-            if (playerMails[i] ==     (PlayerPrefs.GetString("UserName")))
+            if (playerMails[i] == (PlayerPrefs.GetString("UserName")))
             {
                 var go = players[i];
                 Debug.Log(go.GetComponent<ID>().scorePosCount);
@@ -134,6 +144,5 @@ public class ScoreTable : MonoBehaviour
             }
         }
     }
-
 
 }

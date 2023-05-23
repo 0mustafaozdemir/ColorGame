@@ -18,7 +18,9 @@ public class OpenScenes : MonoBehaviour
     public void TouchOpen(GameObject panel)
     {
         touchPanel = panel;
+      
         panel.SetActive(true);
+         panel .transform.DOScale(1f, 1f).SetEase(Ease.OutExpo);
         
 
 
@@ -29,12 +31,9 @@ public class OpenScenes : MonoBehaviour
         StartCoroutine(ItemAnimation());
     }
     public void ClosePanel(GameObject panel)
-    {
-       
-       panel.transform.LeanScale(Vector2.zero, 1f).setEaseInBack();
-
-
-        touchPanel = null;
+    {       
+       panel.SetActive(false);
+       touchPanel = null;
     }
 
 
@@ -58,7 +57,6 @@ public class OpenScenes : MonoBehaviour
 
     public void OpenScene(int sceneInt)
     {
-
         SceneManager.LoadScene(sceneInt);
     }
     public void PauseGame()

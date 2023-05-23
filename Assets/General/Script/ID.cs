@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class ID : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class ID : MonoBehaviour
    public int score;
    public int scorePosCount;
    public TextMeshProUGUI scorePosText;
+   public string AuthID;
+   public RawImage rawImage;
     void Start()
     {
         

@@ -67,9 +67,6 @@ public class Ball : MonoBehaviour
         db = FirebaseFirestore.DefaultInstance;
 
         HighScoresChange();
-
-
-
     }
 
     public void HighScoresChange()
